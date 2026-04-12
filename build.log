@@ -1,0 +1,23 @@
+
+> brainwave@0.1.0 build
+> next build
+
+Γû▓ Next.js 16.2.2 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 6.3s
+  Running TypeScript ...
+Failed to type check.
+
+./app/api/login/route.ts:20:57
+Type error: Property 'password' does not exist on type '{ id: string; }'.
+
+  18 | ...) return NextResponse.json({ error: "Invalid credentials" }, { status: 400 });
+  19 | ...
+> 20 | ...atch = await verifyPassword(password, user.password);
+     |                                               ^
+  21 | ...tch) return NextResponse.json({ error: "Invalid credentials" }, { status: 400 });
+  22 | ...
+  23 | ...en = jwt.sign({ id: user.id, phoneNumber: user.phoneNumber }, JWT_SECRET, { expiresIn: ...
+Next.js build worker exited with code: 1 and signal: null
