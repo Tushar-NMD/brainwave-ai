@@ -1,14 +1,22 @@
-// lib/userService.ts
 import { db } from "./firebase";
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import bcrypt from "bcryptjs";
 
-export const getUserByPhone = async (phoneNumber: string) => {
+type UserDoc = {
+  id: string;
+  name: string;
+  phoneNumber: string;
+  password: string;
+};
+
+export const getUserByPhone = async (phoneNumber: string): Promise<UserDoc | null> => {
   const usersRef = collection(db, "users");
   const q = query(usersRef, where("phoneNumber", "==", phoneNumber));
   const snapshot = await getDocs(q);
   if (snapshot.empty) return null;
-  return { id: snapshot.docs[0].id, ...snapshot.docs[0].data() };
+
+  const doc = snapshot.docs[0];
+  return { id: doc.id, ...doc.data() } as UserDoc;
 };
 
 export const createUser = async (name: string, phoneNumber: string, password: string) => {
