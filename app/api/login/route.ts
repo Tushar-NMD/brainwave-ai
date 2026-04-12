@@ -2,8 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { getUserByPhone, verifyPassword } from "../../lib/userService";
-
-const JWT_SECRET = process.env.JWT_SECRET || "mysecretkey";
+import { JWT_SECRET } from "../../lib/auth";
 
 type RequestBody = {
   phoneNumber: string;
